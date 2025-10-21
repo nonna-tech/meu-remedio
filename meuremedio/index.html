@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MeuRemédio</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#16a34a" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1 class="logo">💊 MeuRemédio</h1>
+
+    <section class="card">
+      <h2>Perfil</h2>
+      <form id="formUser">
+        <label for="nomeUsuario">Seu nome</label>
+        <input id="nomeUsuario" required placeholder="Digite seu nome" />
+        <button type="submit" class="btn-primary">Salvar nome</button>
+      </form>
+      <p id="boasVindas"></p>
+    </section>
+
+    <section class="card">
+      <h2>Cadastrar / Editar Remédio</h2>
+      <form id="formMed">
+        <input type="hidden" id="editId" />
+        <label>Nome do remédio</label>
+        <input id="medNome" required placeholder="Ex.: Losartana" />
+
+        <label>Tipo</label>
+        <div class="chips" data-group="tipo">
+          <button type="button" class="chip" data-value="pílula">Pílula</button>
+          <button type="button" class="chip" data-value="líquido">Líquido</button>
+          <button type="button" class="chip" data-value="cápsula">Cápsula</button>
+          <button type="button" class="chip" data-value="spray">Spray</button>
+          <button type="button" class="chip" data-value="insulina">Insulina</button>
+          <button type="button" class="chip chip-outro" data-outro="tipo">Outro</button>
+        </div>
+        <input id="tipoOutro" class="outro hidden" placeholder="Digite o tipo (ex.: pomada)" />
+
+        <label>Dosagem</label>
+        <div class="chips" data-group="dose">
+          <button type="button" class="chip" data-value="5mg">5 mg</button>
+          <button type="button" class="chip" data-value="10mg">10 mg</button>
+          <button type="button" class="chip" data-value="25mg">25 mg</button>
+          <button type="button" class="chip" data-value="50mg">50 mg</button>
+          <button type="button" class="chip" data-value="100mg">100 mg</button>
+          <button type="button" class="chip chip-outro" data-outro="dose">Outro</button>
+        </div>
+        <input id="doseOutro" class="outro hidden" placeholder="Digite a dosagem (ex.: 75 mg ou 10 ml)"/>
+
+        <label>Quantidade</label>
+        <div class="chips" data-group="qtd">
+          <button type="button" class="chip" data-value="1/2">½</button>
+          <button type="button" class="chip" data-value="1">1</button>
+          <button type="button" class="chip" data-value="2">2</button>
+          <button type="button" class="chip" data-value="3">3</button>
+          <button type="button" class="chip" data-value="5">5</button>
+          <button type="button" class="chip" data-value="10">10</button>
+          <button type="button" class="chip" data-value="20">20</button>
+          <button type="button" class="chip chip-outro" data-outro="qtd">Outro</button>
+        </div>
+        <input id="qtdOutro" class="outro hidden" placeholder="Digite a quantidade (ex.: 30 gotas)" />
+
+        <label>Horário de tomar</label>
+        <input id="medHora" type="time" required />
+
+        <div class="grid2">
+          <div>
+            <label>Foto da receita (opcional)</label>
+            <input id="fotoReceita" type="file" accept="image/*" />
+            <img id="prevReceita" class="preview hidden" alt="Prévia da receita" />
+          </div>
+          <div>
+            <label>Foto do medicamento (opcional)</label>
+            <input id="fotoMedicamento" type="file" accept="image/*" />
+            <img id="prevMedicamento" class="preview hidden" alt="Prévia do remédio" />
+          </div>
+        </div>
+
+        <div class="row">
+          <button type="submit" class="btn-primary grande" id="btnSalvar">Salvar</button>
+          <button type="button" class="btn-secondary grande hidden" id="btnCancelarEdicao">Cancelar</button>
+        </div>
+      </form>
+      <div id="lista"></div>
+    </section>
+
+    <section class="card">
+      <h2>Calendário</h2>
+      <div class="calendario-head">
+        <button id="prevMes" class="small">◀</button>
+        <span id="mesAno"></span>
+        <button id="proxMes" class="small">▶</button>
+      </div>
+      <div id="calendario" class="grid-cal"></div>
+
+      <div class="cal-form">
+        <h3>Marcar consulta / lembrete</h3>
+        <label>Data</label>
+        <input type="date" id="calData">
+        <label>Descrição</label>
+        <input id="calTexto" placeholder="Ex.: Consulta com Dr. João 14h">
+        <button id="btnAddCal" class="btn-primary">Adicionar ao dia</button>
+        <div id="calEventos"></div>
+      </div>
+    </section>
+  </main>
+
+  <audio id="beep" src="img/beep.wav" preload="auto"></audio>
+  <script src="js/app.js"></script>
+  <script src="js/calendar.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('service-worker.js'); }
+    Notification?.requestPermission?.();
+  </script>
+</body>
+</html>
